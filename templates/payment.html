@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Page</title>
+    <link rel="stylesheet" href="../styles/styles.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="menu.html">Menu</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <h1>Items</h1>
+        <div class="cart-items-container">
+            <!-- Cart items will be added here by JavaScript -->
+        </div>
+        <script type="module">
+            import { shoppingCart } from '../script/cart.js';
+            document.addEventListener('DOMContentLoaded', () => {
+              const cartItemsContainer = document.querySelector('.cart-items-container');
+              shoppingCart.forEach(item => {
+                const itemElement = document.createElement('div');
+                itemElement.innerHTML = `
+                  <p>${item.name} - Quantity: ${item.quantity} - Price: $${item.price}</p>
+                `;
+                cartItemsContainer.appendChild(itemElement);
+              });
+            });
+          </script>
+
+        <h1>Payment Details</h1>
+        <!-- Add your payment form or relevant content here -->
+        <form id="payment-form">
+            <!-- Your payment fields (e.g., card number, expiration date, CVV) go here -->
+            <!-- Example: -->
+            <input type="text" placeholder="Card Number">
+            <input type="text" placeholder="Expiration Date">
+            <input type="text" placeholder="CVV">
+            <button type="submit">Pay Now</button>
+        </form>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Cafe Name. All rights reserved.</p>
+    </footer>
+
+</body>
+</html>

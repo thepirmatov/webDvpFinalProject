@@ -1,0 +1,119 @@
+/* Menu-specific styles */
+
+body {
+    display: flex; /* Using flexbox to arrange items horizontally */
+    flex-wrap: wrap; /* Allowing items to wrap to the next line if needed */
+    justify-content: center; /* Centering items horizontally */
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.item {
+    width: 150px; /* Setting a fixed width for each item */
+    text-align: center; /* Centering content within each item */
+    margin: 20px;
+    padding: 10px;
+    background-color: #fff; /* Background color for each item */
+    border-radius: 10px; /* Rounded corners for each item */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Adding a shadow effect */
+    transition: transform 0.3s ease; /* Adding a smooth transition effect */
+    display: inline-block;  /* Make items display inline-block */
+}
+.item:last-child {  /* Remove margin from the last item */
+    margin-right: 0;
+}
+
+.item:hover {
+    transform: translateY(-5px); /* Adding a slight lift effect on hover */
+}
+
+.item img {
+    width: 100%; /* Making sure images fill their container */
+    height: auto;
+    border-radius: 10px; /* Rounded corners for images */
+}
+
+.item .info {
+    margin-top: 10px; /* Adding some space between image and text */
+}
+
+h2{
+    text-align: center;
+    color:blueviolet;
+    display: flex;
+}
+
+/*styles for header and footer*/
+
+header {
+    background-color: #f8f9fa; /* Add background color to the header */
+    padding: 20px; /* Add padding to the header */
+}
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+nav ul li {
+display: inline;
+margin-right: 20px;
+}
+nav ul li a {
+    text-decoration: none;
+    color: #000000;
+    font-weight: bold;
+}
+nav ul li a:hover {
+color: #1500ff;
+}
+footer {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 10px 0;
+}
+main {
+    flex-grow: 1; /* Allow main content to grow and push footer to the bottom */
+    padding: 20px; /* Add padding to main content */
+    overflow-y: auto; /* Make main content area scrollable */
+}
+h1 {
+    background-color: sienna;
+    text-align: center;
+    margin: 0; /* Reset margin for h1 */
+    padding: 20px; /* Add padding to h1 */
+}
+
+/*shopping cart*/
+
+.shopping-cart-icon {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 10px;
+  
+}
+.shopping-cart-icon img[data-count]:after {
+    content: attr(data-count);
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    background-color: red;
+    color: white;
+    border-radius: 50%;
+    padding: 2px 5px;
+    font-size: 0.75em;
+}
+.cart-counter {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-color: red;
+    color: white;
+    border-radius: 50%;
+    padding: 2px 6px;
+    font-size: 0.75em;
+  }
