@@ -11,6 +11,21 @@ body {
     min-height: 100vh;
 }
 
+.logo{
+  
+    img{
+      height: 200px;
+      width: 200px;
+      border-radius: 50%;
+      margin: 0 42%;
+      margin-bottom: 3%;
+    }
+}
+
+.menu-items{
+    margin-top: 5%;
+}
+
 .item {
     width: 150px; /* Setting a fixed width for each item */
     text-align: center; /* Centering content within each item */
@@ -49,14 +64,16 @@ h2{
 /*styles for header and footer*/
 
 header {
-    background-color: #f8f9fa; /* Add background color to the header */
-    padding: 20px; /* Add padding to the header */
+    background-color: #f8f9fa;
+    padding: 20px;
 }
 nav ul {
     list-style-type: none;
     margin: 0;
     padding: 0;
+    text-align: center;
 }
+
 nav ul li {
 display: inline;
 margin-right: 20px;
@@ -66,9 +83,16 @@ nav ul li a {
     color: #000000;
     font-weight: bold;
 }
+
 nav ul li a:hover {
 color: #1500ff;
 }
+
+nav{
+    background-color: #fae1c2;
+    padding: 1% 0;
+}
+
 footer {
     background-color: #333;
     color: #fff;
@@ -116,4 +140,38 @@ h1 {
     border-radius: 50%;
     padding: 2px 6px;
     font-size: 0.75em;
-  }
+}
+
+/**/
+@media (max-width: 768px) {
+    .item {
+        width: 23%;  /* Adjusted for smaller screens to fit 4 items */
+        margin: 1%;
+        padding: 10px;
+    }
+
+    nav ul {
+        flex-direction: row;  /* Keeps navigation horizontal */
+        justify-content: space-around;
+        padding: 0 10px;
+    }
+
+    nav ul li {
+        display: inline-block;
+        margin-right: 5px;  /* Reduced margin for compact appearance */
+    }
+
+    nav ul li a {
+        padding: 10px;
+    }
+
+    header, footer, h1 {
+        padding: 10px;  /* Reduced padding */
+    }
+
+    .shopping-cart-icon {
+        position: fixed;  /* Fixed position at the right top corner */
+        top: 10px;
+        right: 10px;
+    }
+}

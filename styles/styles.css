@@ -7,6 +7,25 @@ body {
   min-height: 100vh; /* Ensure the body takes up at least the full viewport height */
 }
 
+.logo{
+  
+  img{
+    height: 200px;
+    width: 200px;
+    border-radius: 50%;
+    margin: 0 42%;
+    margin-bottom: 3%;
+  }
+}
+
+.navigationBar{
+  background-color: #fae1c2;
+  ul{
+    text-align: center;
+  }
+  padding: 1% 0;
+}
+
 header {
   background-color: #f8f9fa; /* Add background color to the header */
   padding: 20px; /* Add padding to the header */
@@ -83,4 +102,20 @@ footer {
   border-radius: 50%;
   padding: 2px 6px;
   font-size: 0.75em;
+}
+/*Responsive styles*/
+
+@media (max-width: 768px) {
+  nav ul {
+    flex-wrap: wrap;  /* Allows wrapping as needed */
+    justify-content: space-around;  /* Evenly distributes items */
+  }
+
+  nav ul li {
+    margin-right: 10px;  /* Reduced margin for compact appearance */
+  }
+
+  header, footer, h1 {
+    padding: 10px;  /* Reduced padding */
+  }
 }
