@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thank You!</title>
+    <link rel="stylesheet" href="thank_you.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Thank You!</h1>
+        <p>Your order has been placed successfully.</p>
+
+        <!-- Add a new div to display the receipt info -->
+        <div id="receipt-info"></div>
+
+        <p>Click the button below to make more orders:</p>
+        <a href="index.html" id="home-button" class="button">HOME</a>
+    </div>
+
+    <script>
+       // Get these details from localStorage
+        const paymentDetails = JSON.parse(localStorage.getItem('paymentDetails'));
+        const orderDetails = JSON.parse(localStorage.getItem('orderDetails'));
+
+        // Now you can use these details to display the receipt info
+        const receiptInfoElement = document.getElementById('receipt-info');
+        let orderDetailsHTML = '';
+
+        orderDetails.forEach((item, index) => {
+            orderDetailsHTML += `
+                <h3>Item ${index + 1}</h3>
+                <p>Name: ${item.name}</p>
+                <p>Quantity Purchased: ${item.quantity}</p>
+                <p>Price per Item: $${item.price.toFixed(2)}</p>
+                <p>Total Price for Item(s): $${(item.price * item.quantity).toFixed(2)}</p>
+            `;
+        });
+
+        receiptInfoElement.innerHTML = `
+            <h2>Receipt Info</h2>
+            <p>First Name: ${paymentDetails.firstName}</p>
+            <p>Last Name: ${paymentDetails.lastName}</p>
+            <p>Email: ${paymentDetails.email}</p>
+            <h2>Order Details:</h2>
+            ${orderDetailsHTML}
+        `;
+
+        document.getElementById('home-button').addEventListener('click', function() {
+            // Clear the cart items and payment details from localStorage
+            localStorage.removeItem('paymentDetails');
+            localStorage.removeItem('orderDetails');
+
+            // Clear the shoppingCart array
+            localStorage.setItem('cart', JSON.stringify([]));
+        });
+
+    </script>
+</body>
+</html>

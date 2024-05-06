@@ -1,54 +1,71 @@
 export let shoppingCart = [];
 
-export function addToCart(item) {
-  shoppingCart.push(item);
-  updateCartIcon();
+loadCart();
+
+export function addToCart(item, category) {
+  // Check if the item is already in the cart
+  item.category = category;
+  const existingItem = shoppingCart.find(cartItem => cartItem.id === item.id);
+  if (existingItem) {
+      // If the item is already in the cart, increment its quantity
+      existingItem.quantity += 1;
+  } else {
+      // Otherwise, add the item to the cart
+      item.quantity = 1; // Set the quantity to 1
+      shoppingCart.push(item);
+  }
+
+  // Save the updated cart to localStorage
+  localStorage.setItem('cart', JSON.stringify(shoppingCart));
+
+  // Update the cart counter
+  updateCartCounter();
+}
+
+
+function loadCart() {
+  const savedCart = localStorage.getItem('cart');
+  if (savedCart !== null) {
+      // Parse the JSON string back into an array
+      shoppingCart = JSON.parse(savedCart);
+  }
+  updateCartCounter();
 }
 
 export function removeFromCart(itemId) {
-    const itemIndex = shoppingCart.findIndex(item => item.id === itemId);
+  const item = shoppingCart.find(item => item.id === itemId);
   
-    if (itemIndex !== -1) {
+  if (item) {
+    if (item.quantity > 1) {
+      // If the item quantity is more than 1, decrease it
+      item.quantity -= 1;
+    } else {
+      // Otherwise, remove the item from the cart
+      const itemIndex = shoppingCart.indexOf(item);
       shoppingCart.splice(itemIndex, 1);
     }
+  }
   
-    updateCartDisplay();
-    updateCartIcon();
+  // Save the updated cart to localStorage
+  localStorage.setItem('cart', JSON.stringify(shoppingCart));
+
+  // Update the cart counter and the cart icon
+  updateCartCounter();
+  updateCartIcon();
+}
+
+export function updateCartCounter() {
+  const cartCounterElement = document.querySelector('.cart-counter');
+  if (cartCounterElement) {
+    const numberOfItems = shoppingCart.reduce((total, item) => total + item.quantity, 0);
+    cartCounterElement.textContent = numberOfItems;
+  }
 }
 
 export function updateCartIcon() {
-    const cartCounterElement = document.querySelector('.cart-counter');
+  const cartCounterElement = document.querySelector('.cart-counter');
+  if (cartCounterElement) {
     const numberOfItems = shoppingCart.reduce((total, item) => total + item.quantity, 0);
     cartCounterElement.textContent = numberOfItems;
-}
-
-export function updateCartDisplay() {
-    const cartDisplayElement = document.querySelector('.cart-display');
-    cartDisplayElement.innerHTML = '';
-    let totalCost = 0;
-
-    shoppingCart.forEach(item => {
-        // Create a new element to display the item
-        const itemElement = document.createElement('div');
-        itemElement.classList.add('cart-item');
-    
-        // Add the item details to the element
-        itemElement.innerHTML = `
-          <span>${item.name}</span>
-          <span>Quantity: ${item.quantity}</span>
-          <span>Price: $${item.price.toFixed(2)}</span>
-          <button onclick="removeFromCart(${item.id})">Remove</button>
-        `;
-    
-        // Append the item element to the cart display element
-        cartDisplayElement.appendChild(itemElement);
-    
-        // Update the total cost
-        totalCost += item.price * item.quantity;
-    });
-
-    const totalCostElement = document.createElement('div');
-    totalCostElement.classList.add('total-cost');
-    totalCostElement.textContent = `Total Cost: $${totalCost.toFixed(2)}`;
-    cartDisplayElement.appendChild(totalCostElement);
+  }
 }
